@@ -5,573 +5,64 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Открой, только если любишь меня ❤️</title>
 <meta name="description" content="Создано с любовью. Открой, чтобы узнать правду.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 body{background:#0a0a0f;color:#fff;font-family:'Inter',sans-serif;overflow:hidden;min-height:100dvh}
 canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.8}
 .aurora{position:absolute;pointer-events:none;border-radius:50%;filter:blur(80px)}
-.aurora-1{width:100%;height:100%;top:-50%;left:-50%;background:radial-gradient(circle,rgba(255,77,109,.1),transparent 70%);animation:auroraAnim 8s ease-in-out infinite}
-.aurora-2{width:100%;height:100%;bottom:-50%;right:-50%;background:radial-gradient(circle,rgba(123,44,191,.1),transparent 70%);animation:auroraAnim 8s ease-in-out infinite 2s}
-.aurora-3{width:75%;height:50%;top:33%;left:12.5%;background:radial-gradient(circle,rgba(255,117,143,.05),transparent 70%);animation:auroraAnim 8s ease-in-out infinite 4s}
-@keyframes auroraAnim{
-  0%{transform:translate(0,0)scale(1);opacity:.3}
-  25%{transform:translate(10%,-10%)scale(1.1);opacity:.4}
-  50%{transform:translate(-5%,5%)scale(.9);opacity:.3}
-  75%{transform:translate(5%,-5%)scale(1.05);opacity:.35}
-  100%{transform:translate(0,0)scale(1);opacity:.3}
-}
-.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;transition:opacity .6s,transform .6s}
-.screen-exit{opacity:0;transform:scale(1.05);pointer-events:none}
-.screen-enter{opacity:1;transform:scale(1)}
-.screen-hidden{opacity:0;transform:scale(.95);pointer-events:none}
-.btn{position:relative;padding:16px 40px;font-size:1.125rem;font-weight:600;border-radius:9999px;border:none;color:#fff;cursor:pointer;overflow:hidden;transition:transform .2s;font-family:'Inter',sans-serif}
+.a1{width:100%;height:100%;top:-50%;left:-50%;background:radial-gradient(circle,rgba(255,77,109,.1),transparent 70%);animation:auroraAnim 8s ease-in-out infinite}
+.a2{width:100%;height:100%;bottom:-50%;right:-50%;background:radial-gradient(circle,rgba(123,44,191,.1),transparent 70%);animation:auroraAnim 8s ease-in-out infinite 2s}
+.a3{width:75%;height:50%;top:33%;left:12.5%;background:radial-gradient(circle,rgba(255,117,143,.05),transparent 70%);animation:auroraAnim 8s ease-in-out infinite 4s}
+@keyframes auroraAnim{0%{transform:translate(0,0)scale(1);opacity:.3}25%{transform:translate(10%,-10%)scale(1.1);opacity:.4}50%{transform:translate(-5%,5%)scale(.9);opacity:.3}75%{transform:translate(5%,-5%)scale(1.05);opacity:.35}100%{transform:translate(0,0)scale(1);opacity:.3}}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10}
+.scr-in{opacity:1;transition:opacity .6s,transform .6s}
+.scr-out{opacity:0;transform:scale(1.05);pointer-events:none;transition:opacity .6s,transform .6s}
+.btn{position:relative;padding:16px 40px;font-size:1.125rem;font-weight:600;border-radius:9999px;border:none;color:#fff;cursor:pointer;overflow:hidden;transition:transform .2s;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent}
 .btn:hover{transform:scale(1.05)}
 .btn:active{transform:scale(.95)}
-.btn-primary{background:linear-gradient(135deg,#FF4D6D,#7B2CBF)}
-.btn-primary::before{content:'';position:absolute;inset:-4px;background:linear-gradient(135deg,#FF4D6D,#7B2CBF);border-radius:9999px;filter:blur(8px);opacity:.4;transition:opacity .2s}
-.btn-primary:hover::before{opacity:.6}
-.btn-secondary{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px)}
-.text-gradient{background:linear-gradient(135deg,#FF4D6D,#FF758F,#FFB3C1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.text-center{text-align:center}
-.heart{display:inline-block}
-.heart-pulse{animation:pulseHeart 2.5s ease-in-out infinite}
-@keyframes pulseHeart{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-@keyframes pulseGlow{
-  0%,100%{box-shadow:0 0 20px rgba(255,77,109,.3),0 0 60px rgba(255,77,109,.1)}
-  50%{box-shadow:0 0 40px rgba(255,77,109,.5),0 0 80px rgba(255,77,109,.2)}
-}
-.glow{padding:20px;border-radius:50%;animation:pulseGlow 3s ease-in-out infinite;display:inline-flex}
-.fadeIn{animation:fadeIn .8s ease forwards}
-.fadeInUp{animation:fadeInUp .8s ease forwards}
-.fadeInScale{animation:fadeInScale .6s ease forwards}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInScale{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
-@keyframes typewriter{from{width:0}to{width:100%}}
-.typewriter{display:inline;overflow:hidden;white-space:nowrap;border-right:2px solid #FF4D6D;animation:blink .8s step-end infinite}
-@keyframes blink{50%{border-color:transparent}}
-.fadeOut{animation:fadeOut .5s ease forwards}
-@keyframes fadeOut{to{opacity:0}}
-.made{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:50;font-size:.75rem;color:rgba(255,255,255,.15);font-family:monospace;opacity:0;animation:fadeIn 1s ease 2s forwards}
-.flying-hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-@keyframes floatUp{
-  0%{transform:translateY(0)translateX(0)scale(0);opacity:0}
-  20%{opacity:1}
-  80%{opacity:1}
-  100%{transform:translateY(-120vh)translateX(var(--x))scale(.5);opacity:0}
-}
-.float-heart{position:absolute;animation:floatUp var(--dur) ease-in-out var(--delay) infinite;bottom:-40px}
-.shake{animation:shake .5s ease}
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)rotate(-3deg)}
-  75%{transform:translateX(5px)rotate(3deg)}
-}
-.fullscreen{position:fixed;inset:0;overflow:hidden}
-.page{width:100%;height:100dvh;position:relative;overflow:hidden}
+.btn-p{background:linear-gradient(135deg,#FF4D6D,#7B2CBF)}
+.btn-p::before{content:'';position:absolute;inset:-4px;background:linear-gradient(135deg,#FF4D6D,#7B2CBF);border-radius:9999px;filter:blur(8px);opacity:.4;transition:opacity .2s}
+.btn-p:hover::before{opacity:.6}
+.btn-s{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px)}
+.tg{background:linear-gradient(135deg,#FF4D6D,#FF758F,#FFB3C1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tc{text-align:center}
+.hi{display:inline-block}
+.hp{animation:ph 2.5s ease-in-out infinite}
+@keyframes ph{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes pg{0%,100%{box-shadow:0 0 20px rgba(255,77,109,.3),0 0 60px rgba(255,77,109,.1)}50%{box-shadow:0 0 40px rgba(255,77,109,.5),0 0 80px rgba(255,77,109,.2)}}
+.gw{padding:20px;border-radius:50%;animation:pg 3s ease-in-out infinite;display:inline-flex}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes fu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fs{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes bl{50%{border-color:transparent}}
+@keyframes fo{to{opacity:0}}
+@keyframes fu2{0%{transform:translateY(0)translateX(0)scale(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateY(-120vh)translateX(var(--fx))scale(.5);opacity:0}}
+.fh{position:absolute;animation:fu2 var(--fd) ease-in-out var(--fl) infinite;bottom:-40px;pointer-events:none}
+.made{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:50;font-size:.75rem;color:rgba(255,255,255,.15);font-family:monospace}
 </style>
 </head>
 <body>
 <div id="root"></div>
 <div class="made">made with ❤️</div>
 
-<script type="text/babel" data-presets="react">
-const { useState, useEffect, useRef, useCallback, useMemo } = React;
-
-// SVG Heart Component
-function HeartSvg({ size = 24, color = "#FF4D6D", className = "" }) {
-  return React.createElement("svg", {
-    viewBox: "0 0 24 24",
-    fill: color,
-    className: `${className}`,
-    style: { width: size, height: size },
-    dangerouslySetInnerHTML: {
-      __html: '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>'
-    }
-  });
-}
-
-// Particle Field
-function ParticleField() {
-  const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
-  const particlesRef = useRef([]);
-  const frameRef = useRef(0);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const init = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 80);
-      const p = [];
-      for (let i = 0; i < count; i++) {
-        p.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: (Math.random() - 0.5) * 0.6,
-          size: Math.random() * 3 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
-          hue: Math.random() > 0.5 ? 343 : 270,
-        });
-      }
-      particlesRef.current = p;
-    };
-
-    init();
-    window.addEventListener("resize", init);
-    window.addEventListener("mousemove", (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    });
-
-    const animate = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      const particles = particlesRef.current;
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      for (const p of particles) {
-        const dx = mx - p.x;
-        const dy = my - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150;
-          p.vx -= (dx / dist) * force * 0.02;
-          p.vy -= (dy / dist) * force * 0.02;
-        }
-        p.vx += (Math.random() - 0.5) * 0.02;
-        p.vy += (Math.random() - 0.5) * 0.02;
-        p.vx *= 0.99;
-        p.vy *= 0.99;
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue},80%,65%,${p.opacity})`;
-        ctx.fill();
-      }
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255,77,109,${0.08 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      frameRef.current = requestAnimationFrame(animate);
-    };
-    frameRef.current = requestAnimationFrame(animate);
-    return () => {
-      cancelAnimationFrame(frameRef.current);
-      window.removeEventListener("resize", init);
-    };
-  }, []);
-
-  return React.createElement("canvas", { ref: canvasRef });
-}
-
-// Screen 1
-function Screen1({ onContinue, visible }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    if (visible) setTimeout(() => setShow(true), 100);
-  }, [visible]);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: `screen ${show ? 'screen-enter' : ''}` },
-    React.createElement("div", { className: "glow", style: { marginBottom: 48 } },
-      React.createElement("div", { className: "heart-pulse" },
-        React.createElement(HeartSvg, { size: 160, color: "#FF4D6D", className: "heart", style: { filter: "drop-shadow(0 0 30px rgba(255,77,109,.6))" } })
-      )
-    ),
-    show && React.createElement("h1", {
-      className: "text-center",
-      style: { fontSize: "clamp(1.5rem,5vw,2.5rem)", fontWeight: 700, marginBottom: 48, lineHeight: 1.6, animation: "fadeInUp .8s ease .4s both" }
-    },
-      React.createElement("span", { className: "text-gradient" }, "Открой только если"),
-      React.createElement("br"),
-      React.createElement("span", { className: "text-gradient" }, "любишь меня ", React.createElement(HeartSvg, { size: 28, color: "#FF4D6D", className: "heart", style: { verticalAlign: "middle" } }))
-    ),
-    show && React.createElement("button", {
-      className: "btn btn-primary",
-      onClick: onContinue,
-      style: { animation: "fadeInUp .6s ease .8s both", fontSize: "1.125rem" }
-    }, "Открыть")
-  );
-}
-
-// Screen 2
-function Screen2({ onContinue, visible }) {
-  const [showText, setShowText] = useState(false);
-  const [showBtns, setShowBtns] = useState(false);
-  const [typed, setTyped] = useState("");
-  const noBtnRef = useRef(null);
-  const fullText = "Ты уверен(а)?";
-
-  useEffect(() => {
-    if (!visible) return;
-    const t1 = setTimeout(() => setShowText(true), 300);
-    const t2 = setTimeout(() => setShowBtns(true), 2200);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [visible]);
-
-  useEffect(() => {
-    if (!showText) return;
-    let i = 0;
-    const iv = setInterval(() => { setTyped(fullText.slice(0, i + 1)); i++; if (i >= fullText.length) clearInterval(iv); }, 80);
-    return () => clearInterval(iv);
-  }, [showText]);
-
-  const moveNo = useCallback(() => {
-    const btn = noBtnRef.current;
-    if (!btn) return;
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const bw = btn.offsetWidth, bh = btn.offsetHeight;
-    btn.style.position = "fixed";
-    btn.style.left = (Math.random() * (vw - bw - 40) + 20) + "px";
-    btn.style.top = (Math.random() * (vh - bh - 40) + 20) + "px";
-  }, []);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: `screen ${showText ? 'screen-enter' : ''}` },
-    React.createElement("h2", {
-      className: "text-center text-gradient",
-      style: { fontSize: "clamp(1.75rem,5vw,3rem)", fontWeight: 700, marginBottom: 64, minHeight: 60 }
-    }, typed, React.createElement("span", { style: { animation: "blink .8s step-end infinite", borderRight: "2px solid #FF4D6D" } }, "|")),
-    showBtns && React.createElement("div", {
-      className: "text-center",
-      style: { animation: "fadeInUp .5s ease both", display: "flex", flexDirection: "row", gap: 24, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }
-    },
-      React.createElement("button", { className: "btn btn-primary", onClick: onContinue }, "Да ❤️"),
-      React.createElement("button", {
-        ref: noBtnRef,
-        className: "btn btn-secondary",
-        onMouseEnter: moveNo,
-        onClick: moveNo
-      }, "Нет 🙈")
-    )
-  );
-}
-
-// Screen 3
-function Screen3({ onContinue, visible }) {
-  const [showText, setShowText] = useState(false);
-  const [showHeart, setShowHeart] = useState(false);
-  const [showBtns, setShowBtns] = useState(false);
-  const noBtnRef = useRef(null);
-
-  useEffect(() => {
-    if (!visible) return;
-    const t1 = setTimeout(() => setShowText(true), 400);
-    const t2 = setTimeout(() => setShowHeart(true), 1200);
-    const t3 = setTimeout(() => setShowBtns(true), 2000);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [visible]);
-
-  const moveNo = useCallback(() => {
-    const btn = noBtnRef.current;
-    if (!btn) return;
-    btn.style.position = "fixed";
-    btn.style.left = (Math.random() * (window.innerWidth - btn.offsetWidth - 40) + 20) + "px";
-    btn.style.top = (Math.random() * (window.innerHeight - btn.offsetHeight - 40) + 20) + "px";
-  }, []);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: `screen` },
-    showText && React.createElement("h2", {
-      className: "text-center text-gradient",
-      style: { fontSize: "clamp(1.75rem,5vw,3rem)", fontWeight: 700, marginBottom: 40, animation: "fadeInUp .8s ease both" }
-    }, "Точно уверен(а)?"),
-    showHeart && React.createElement("div", {
-      style: { marginBottom: 48, animation: "fadeInScale .6s ease both" }
-    },
-      React.createElement("div", { className: "heart-pulse" },
-        React.createElement(HeartSvg, { size: 128, color: "#FF4D6D", style: { filter: "drop-shadow(0 0 25px rgba(255,77,109,.5))" } })
-      )
-    ),
-    showBtns && React.createElement("div", {
-      style: { animation: "fadeInUp .5s ease both", display: "flex", flexDirection: "row", gap: 24, flexWrap: "wrap", justifyContent: "center" }
-    },
-      React.createElement("button", { className: "btn btn-primary", onClick: onContinue }, "Да, точно ❤️"),
-      React.createElement("button", {
-        ref: noBtnRef,
-        className: "btn btn-secondary",
-        onMouseEnter: moveNo,
-        onClick: moveNo
-      }, "Не знаю 🤔")
-    )
-  );
-}
-
-// Screen 4 - Heart Breaking
-function Screen4({ onContinue, visible }) {
-  const [phase, setPhase] = useState("text");
-  const svgRef = useRef(null);
-  const particlesData = useMemo(() =>
-    Array.from({ length: 30 }, () => ({
-      x: (Math.random() - 0.5) * 600,
-      y: (Math.random() - 0.5) * 600,
-      dur: 1 + Math.random(),
-      delay: Math.random() * 0.5,
-    })), []
-  );
-
-  useEffect(() => {
-    if (!visible) return;
-    setPhase("text");
-    const t1 = setTimeout(() => setPhase("heart"), 2000);
-    const t2 = setTimeout(() => setPhase("breaking"), 4000);
-    const t3 = setTimeout(() => { setPhase("done"); onContinue(); }, 5500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [visible]);
-
-  useEffect(() => {
-    if (phase !== "breaking") return;
-    const svg = svgRef.current;
-    if (!svg) return;
-    gsap.to(svg.querySelectorAll("path"), {
-      scale: 0, opacity: 0,
-      rotation: () => gsap.utils.random(-30, 30),
-      x: () => gsap.utils.random(-100, 100),
-      y: () => gsap.utils.random(-100, 100),
-      duration: 1.2, ease: "power3.out", stagger: 0.03,
-    });
-    gsap.to(svg, { scale: 0.3, opacity: 0, duration: 0.8, delay: 0.5, ease: "power2.in" });
-  }, [phase]);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: "screen" },
-    phase === "text" && React.createElement("h2", {
-      key: "t",
-      className: "text-center text-gradient",
-      style: { fontSize: "clamp(1.25rem,4vw,2.25rem)", fontWeight: 700, animation: "fadeInUp .8s ease both" }
-    }, "Последний шанс перед правдой..."),
-    (phase === "heart" || phase === "breaking") && React.createElement("div", {
-      key: "h",
-      style: { position: "relative", animation: "fadeInScale .6s ease .2s both" }
-    },
-      React.createElement("div", {
-        style: {
-          position: "absolute", inset: 0,
-          background: "radial-gradient(circle,rgba(255,77,109,.2),transparent 70%)",
-          filter: "blur(60px)", transform: "scale(1.5)"
-        }
-      }),
-      React.createElement("svg", {
-        ref: svgRef,
-        viewBox: "0 0 24 24",
-        style: { width: "clamp(12rem,30vw,16rem)", height: "clamp(12rem,30vw,16rem)", position: "relative", zIndex: 1 },
-        dangerouslySetInnerHTML: {
-          __html: `<defs><filter id="g"><feGaussianBlur stdDeviation="1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>`
-        }
-      }),
-      phase === "breaking" && React.createElement("div", {
-        style: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }
-      }, React.createElement("span", { style: { fontSize: "clamp(3rem,8vw,5rem)", opacity: .1 } }, "💔"))
-    ),
-    phase === "breaking" && React.createElement("div", {
-      style: { position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }
-    }, particlesData.map((p, i) =>
-      React.createElement("div", {
-        key: i,
-        style: {
-          position: "absolute", width: 8, height: 8, borderRadius: "50%",
-          background: `hsl(${343 + Math.sin(i) * 20},80%,${50 + Math.sin(i * 2) * 30}%)`,
-          left: "50%", top: "50%",
-          animation: `fadeOut ${p.dur}s ease ${p.delay}s forwards`,
-          transform: `translate(${p.x}px,${p.y}px)`
-        }
-      })
-    ))
-  );
-}
-
-// Screen 5 - Heart Restoration
-function Screen5({ onContinue, visible }) {
-  const [phase, setPhase] = useState("silence");
-  const heartRef = useRef(null);
-  const glowRef = useRef(null);
-
-  useEffect(() => {
-    if (!visible) return;
-    setPhase("silence");
-    const t1 = setTimeout(() => setPhase("restoring"), 1200);
-    const t3 = setTimeout(() => setPhase("pulsing"), 3500);
-    const t4 = setTimeout(() => { setPhase("done"); onContinue(); }, 5000);
-    return () => { clearTimeout(t1); clearTimeout(t3); clearTimeout(t4); };
-  }, [visible]);
-
-  useEffect(() => {
-    if (phase !== "restoring") return;
-    const h = heartRef.current;
-    const g = glowRef.current;
-    if (h) gsap.fromTo(h, { scale: 0, opacity: 0, rotation: -180 }, { scale: 1, opacity: 1, rotation: 0, duration: 1.5, ease: "elastic.out(1,0.5)" });
-    if (g) gsap.fromTo(g, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 2, duration: 1.2, ease: "power2.out" });
-  }, [phase]);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: "screen" },
-    phase === "silence" && React.createElement("div", {
-      style: { fontSize: "clamp(2rem,5vw,4rem)", fontWeight: 300, color: "rgba(255,255,255,.2)", animation: "fadeIn .5s ease both" }
-    }, "..."),
-    phase === "restoring" && React.createElement("div", {
-      style: { position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle,rgba(255,77,109,.3),rgba(123,44,191,.2),transparent 70%)" }
-    }),
-    (phase === "restoring" || phase === "pulsing") && React.createElement("div", {
-      style: { position: "relative", animation: "fadeIn .5s ease both" }
-    },
-      React.createElement("div", {
-        ref: glowRef,
-        style: {
-          position: "absolute", inset: 0,
-          background: "radial-gradient(circle,rgba(255,77,109,.4),rgba(255,117,143,.2),transparent 70%)",
-          filter: "blur(60px)"
-        }
-      }),
-      React.createElement("div", {
-        ref: heartRef,
-        style: { position: "relative", zIndex: 1 }
-      },
-        React.createElement("div", {
-          className: phase === "pulsing" ? "heart-pulse" : "",
-          style: phase === "pulsing" ? { filter: "drop-shadow(0 0 30px rgba(255,77,109,.6))" } : {}
-        },
-          React.createElement(HeartSvg, { size: 224, color: "url(#hg)" })
-        )
-      )
-    )
-  );
-}
-
-// Flying Hearts Data
-const heartsData = Array.from({ length: 15 }, () => ({
-  left: Math.random() * 100,
-  hue: 343 + Math.random() * 20,
-  light: 60 + Math.random() * 20,
-  dur: 3 + Math.random() * 3,
-  delay: Math.random() * 3,
-}));
-
-// Screen 6 - Final
-function Screen6({ onRestart, visible }) {
-  const [showFirst, setShowFirst] = useState(false);
-  const [showSecond, setShowSecond] = useState(false);
-  const [showBtn, setShowBtn] = useState(false);
-
-  useEffect(() => {
-    if (!visible) return;
-    setShowFirst(false); setShowSecond(false); setShowBtn(false);
-    const t1 = setTimeout(() => setShowFirst(true), 800);
-    const t2 = setTimeout(() => setShowSecond(true), 3000);
-    const t3 = setTimeout(() => setShowBtn(true), 4500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [visible]);
-
-  if (!visible) return null;
-  return React.createElement("div", { className: "screen", style: { padding: "0 24px" } },
-    React.createElement("div", { className: "flying-hearts" },
-      heartsData.map((h, i) =>
-        React.createElement("div", {
-          key: i,
-          className: "float-heart",
-          style: {
-            left: `${h.left}%`,
-            "--dur": `${h.dur}s`,
-            "--delay": `${h.delay}s`,
-            "--x": `${(Math.random() - 0.5) * 200}px`,
-          }
-        },
-          React.createElement(HeartSvg, { size: 16, color: `hsla(${h.hue},80%,${h.light}%,.6)` })
-        )
-      )
-    ),
-    showFirst && React.createElement("div", {
-      style: { textAlign: "center", maxWidth: 640, marginBottom: 32, animation: "fadeInScale .8s ease both" }
-    },
-      React.createElement("div", {
-        style: { marginBottom: 24, display: "flex", justifyContent: "center" }
-      },
-        React.createElement("div", { className: "heart-pulse" },
-          React.createElement(HeartSvg, { size: 80, style: { filter: "drop-shadow(0 0 20px rgba(255,77,109,.5))" } })
-        )
-      ),
-      React.createElement("p", {
-        style: { fontSize: "clamp(1.25rem,3.5vw,2.25rem)", fontWeight: 700, lineHeight: 1.6 }
-      },
-        React.createElement("span", { className: "text-gradient" }, "Потому что среди миллиардов людей"),
-        React.createElement("br"),
-        React.createElement("span", { className: "text-gradient" }, "именно ты стал(а) самым важным"),
-        React.createElement("br"),
-        React.createElement("span", { className: "text-gradient" }, "человеком в моей жизни ", React.createElement(HeartSvg, { size: 24, className: "heart", style: { verticalAlign: "middle" } }))
-      )
-    ),
-    showSecond && React.createElement("p", {
-      style: { textAlign: "center", fontSize: "clamp(1rem,2.5vw,1.5rem)", color: "rgba(255,255,255,.6)", fontWeight: 300, fontStyle: "italic", marginBottom: 48, animation: "fadeInUp .8s ease both" }
-    }, "Спасибо, что ты есть."),
-    showBtn && React.createElement("button", {
-      className: "btn btn-primary",
-      onClick: onRestart,
-      style: { animation: "fadeInUp .6s ease both", fontSize: "1.125rem", zIndex: 20 }
-    }, "Создать такую же историю ", React.createElement(HeartSvg, { size: 20, className: "heart", style: { verticalAlign: "middle" } }))
-  );
-}
-
-// Main App
-function App() {
-  const [screen, setScreen] = useState(1);
-
-  return React.createElement("div", { className: "fullscreen" },
-    React.createElement(ParticleField),
-    React.createElement("div", { className: "page" },
-      React.createElement("div", { className: "aurora aurora-1" }),
-      React.createElement("div", { className: "aurora aurora-2" }),
-      React.createElement("div", { className: "aurora aurora-3" }),
-      React.createElement(Screen1, { visible: screen === 1, onContinue: () => setScreen(2) }),
-      React.createElement(Screen2, { visible: screen === 2, onContinue: () => setScreen(3) }),
-      React.createElement(Screen3, { visible: screen === 3, onContinue: () => setScreen(4) }),
-      React.createElement(Screen4, { visible: screen === 4, onContinue: () => setScreen(5) }),
-      React.createElement(Screen5, { visible: screen === 5, onContinue: () => setScreen(6) }),
-      React.createElement(Screen6, { visible: screen === 6, onRestart: () => setScreen(1) })
-    )
-  );
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(App));
+<script>
+const{useState,useEffect,useRef,useCallback}=React;
+function HS({s=24,c="#FF4D6D",cl=""}){return React.createElement("svg",{viewBox:"0 0 24 24",fill:c,className:cl,style:{width:s,height:s},dangerouslySetInnerHTML:{__html:'<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>'}})}
+function PF(){const cr=useRef(null),mr=useRef({x:-1e3,y:-1e3}),pr=useRef([]),fr=useRef(0);useEffect(()=>{const c=cr.current;if(!c)return;const x=c.getContext("2d");if(!x)return;const n=()=>{c.width=innerWidth;c.height=innerHeight;const t=Math.min(Math.floor(c.width*c.height/12e3),80),p=[];for(let i=0;i<t;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,sz:Math.random()*3+1,op:Math.random()*.5+.2,hu:Math.random()>.5?343:270});pr.current=p};n();const r=()=>{n();mr.current={x:innerWidth/2,y:innerHeight/2}};addEventListener("resize",r);addEventListener("mousemove",e=>{mr.current={x:e.clientX,y:e.clientY}});const a=()=>{const w=c.width,h=c.height;x.clearRect(0,0,w,h);const p=pr.current,{x:mx,y:my}=mr.current;for(const q of p){const dx=mx-q.x,dy=my-q.y,ds=Math.sqrt(dx*dx+dy*dy);if(ds<150){const f=(150-ds)/150;q.vx-=dx/ds*f*.02;q.vy-=dy/ds*f*.02}q.vx+=(Math.random()-.5)*.02;q.vy+=(Math.random()-.5)*.02;q.vx*=.99;q.vy*=.99;q.x+=q.vx;q.y+=q.vy;if(q.x<0)q.x=w;if(q.x>w)q.x=0;if(q.y<0)q.y=h;if(q.y>h)q.y=0;x.beginPath();x.arc(q.x,q.y,q.sz,0,Math.PI*2);x.fillStyle=`hsla(${q.hu},80%,65%,${q.op})`;x.fill()}for(let i=0;i<p.length;i++){for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,ds=Math.sqrt(dx*dx+dy*dy);if(ds<120){x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.strokeStyle=`rgba(255,77,109,${.08*(1-ds/120)})`;x.lineWidth=.5;x.stroke()}}}fr.current=requestAnimationFrame(a)};fr.current=requestAnimationFrame(a);return()=>{cancelAnimationFrame(fr.current);removeEventListener("resize",r)}},[]);return React.createElement("canvas",{ref:cr})}
+function S1({oc,vi}){const[sh,st]=useState(false);useEffect(()=>{if(vi){const t=setTimeout(()=>st(true),100);return()=>clearTimeout(t)}},[vi]);if(!vi)return null;return React.createElement("div",{className:`scr ${sh?'scr-in':'scr-out'}`},React.createElement("div",{className:"gw",style:{marginBottom:48}},React.createElement("div",{className:"hp"},React.createElement(HS,{s:160,c:"#FF4D6D",style:{filter:"drop-shadow(0 0 30px rgba(255,77,109,.6))"}}))),sh&&React.createElement("h1",{className:"tc",style:{fontSize:"clamp(1.5rem,5vw,2.5rem)",fontWeight:700,marginBottom:48,lineHeight:1.6,animation:"fu .8s ease .4s both"}},React.createElement("span",{className:"tg"},"Открой только если"),React.createElement("br"),React.createElement("span",{className:"tg"},"любишь меня ",React.createElement(HS,{s:28,c:"#FF4D6D",style:{verticalAlign:"middle"}}))),sh&&React.createElement("button",{className:"btn btn-p",onClick:oc,style:{animation:"fu .6s ease .8s both"}},"Открыть"))}
+function S2({oc,vi}){const[st,st2]=useState(false),[sb,sb2]=useState(false),[ty,ty2]=useState(""),nr=useRef(null),ft="Ты уверен(а)?";useEffect(()=>{if(!vi)return;const t1=setTimeout(()=>st2(true),300),t2=setTimeout(()=>sb2(true),2200);return()=>{clearTimeout(t1);clearTimeout(t2)}},[vi]);useEffect(()=>{if(!st)return;let i=0;const iv=setInterval(()=>{ty2(ft.slice(0,i+1));i++;if(i>=ft.length)clearInterval(iv)},80);return()=>clearInterval(iv)},[st]);const mn=useCallback(()=>{const b=nr.current;if(!b)return;b.style.position="fixed";b.style.left=(Math.random()*(innerWidth-b.offsetWidth-40)+20)+"px";b.style.top=(Math.random()*(innerHeight-b.offsetHeight-40)+20)+"px"},[]);if(!vi)return null;return React.createElement("div",{className:`scr ${st?'scr-in':'scr-out'}`},React.createElement("h2",{className:"tc tg",style:{fontSize:"clamp(1.75rem,5vw,3rem)",fontWeight:700,marginBottom:64,minHeight:60}},ty,React.createElement("span",{style:{animation:"bl .8s step-end infinite",borderRight:"2px solid #FF4D6D"}},"|")),sb&&React.createElement("div",{className:"tc",style:{animation:"fu .5s ease both",display:"flex",flexDirection:"row",gap:24,flexWrap:"wrap",justifyContent:"center",alignItems:"center"}},React.createElement("button",{className:"btn btn-p",onClick:oc},"Да ❤️"),React.createElement("button",{ref:nr,className:"btn btn-s",onMouseEnter:mn,onClick:mn},"Нет 🙈"))))}
+function S3({oc,vi}){const[st,st2]=useState(false),[sh,sh2]=useState(false),[sb,sb2]=useState(false),nr=useRef(null);useEffect(()=>{if(!vi)return;const t1=setTimeout(()=>st2(true),400),t2=setTimeout(()=>sh2(true),1200),t3=setTimeout(()=>sb2(true),2000);return()=>{clearTimeout(t1);clearTimeout(t2);clearTimeout(t3)}},[vi]);const mn=useCallback(()=>{const b=nr.current;if(!b)return;b.style.position="fixed";b.style.left=(Math.random()*(innerWidth-b.offsetWidth-40)+20)+"px";b.style.top=(Math.random()*(innerHeight-b.offsetHeight-40)+20)+"px"},[]);if(!vi)return null;return React.createElement("div",{className:"scr"},st&&React.createElement("h2",{className:"tc tg",style:{fontSize:"clamp(1.75rem,5vw,3rem)",fontWeight:700,marginBottom:40,animation:"fu .8s ease both"}},"Точно уверен(а)?"),sh&&React.createElement("div",{style:{marginBottom:48,animation:"fs .6s ease both"}},React.createElement("div",{className:"hp"},React.createElement(HS,{s:128,c:"#FF4D6D",style:{filter:"drop-shadow(0 0 25px rgba(255,77,109,.5))"}}))),sb&&React.createElement("div",{style:{animation:"fu .5s ease both",display:"flex",flexDirection:"row",gap:24,flexWrap:"wrap",justifyContent:"center"}},React.createElement("button",{className:"btn btn-p",onClick:oc},"Да, точно ❤️"),React.createElement("button",{ref:nr,className:"btn btn-s",onMouseEnter:mn,onClick:mn},"Не знаю 🤔"))))}
+function S4({oc,vi}){const[ph,ph2]=useState("text"),sr=useRef(null),pd=useMemo(()=>Array.from({length:30},()=>({x:(Math.random()-.5)*600,y:(Math.random()-.5)*600,dur:1+Math.random(),delay:Math.random()*.5})),[]);useEffect(()=>{if(!vi)return;ph2("text");const t1=setTimeout(()=>ph2("heart"),2e3),t2=setTimeout(()=>ph2("breaking"),4e3),t3=setTimeout(()=>{ph2("done");oc()},5500);return()=>{clearTimeout(t1);clearTimeout(t2);clearTimeout(t3)}},[vi,oc]);useEffect(()=>{if(ph!=="breaking")return;const s=sr.current;if(!s)return;gsap.to(s.querySelectorAll("path"),{scale:0,opacity:0,rotation:()=>gsap.utils.random(-30,30),x:()=>gsap.utils.random(-100,100),y:()=>gsap.utils.random(-100,100),duration:1.2,ease:"power3.out",stagger:.03});gsap.to(s,{scale:.3,opacity:0,duration:.8,delay:.5,ease:"power2.in"})},[ph]);if(!vi)return null;return React.createElement("div",{className:"scr"},ph==="text"&&React.createElement("h2",{key:"t",className:"tc tg",style:{fontSize:"clamp(1.25rem,4vw,2.25rem)",fontWeight:700,animation:"fu .8s ease both"}},"Последний шанс перед правдой..."),(ph==="heart"||ph==="breaking")&&React.createElement("div",{key:"h",style:{position:"relative",animation:"fs .6s ease .2s both"}},React.createElement("div",{style:{position:"absolute",inset:0,background:"radial-gradient(circle,rgba(255,77,109,.2),transparent 70%)",filter:"blur(60px)",transform:"scale(1.5)"}}),React.createElement("svg",{ref:sr,viewBox:"0 0 24 24",style:{width:"clamp(12rem,30vw,16rem)",height:"clamp(12rem,30vw,16rem)",position:"relative",zIndex:1},dangerouslySetInnerHTML:{__html:'<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF4D6D" opacity=".9" style="transform-origin:12px 12px"/>'}}),ph==="breaking"&&React.createElement("div",{style:{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center"}},React.createElement("span",{style:{fontSize:"clamp(3rem,8vw,5rem)",opacity:.1}},"💔"))),ph==="breaking"&&React.createElement("div",{style:{position:"absolute",inset:0,pointerEvents:"none",overflow:"hidden"}},pd.map((p,i)=>React.createElement("div",{key:i,style:{position:"absolute",width:8,height:8,borderRadius:"50%",background:`hsl(${343+Math.sin(i)*20},80%,${50+Math.sin(i*2)*30}%)`,left:"50%",top:"50%",animation:`fo ${p.dur}s ease ${p.delay}s forwards`,transform:`translate(${p.x}px,${p.y}px)`}}))))}
+function S5({oc,vi}){const[ph,ph2]=useState("silence"),hr=useRef(null),gr=useRef(null);useEffect(()=>{if(!vi)return;ph2("silence");const t1=setTimeout(()=>ph2("restoring"),1200),t3=setTimeout(()=>ph2("pulsing"),3500),t4=setTimeout(()=>{ph2("done");oc()},5e3);return()=>{clearTimeout(t1);clearTimeout(t3);clearTimeout(t4)}},[vi,oc]);useEffect(()=>{if(ph!=="restoring")return;const h=hr.current,g=gr.current;if(h)gsap.fromTo(h,{scale:0,opacity:0,rotation:-180},{scale:1,opacity:1,rotation:0,duration:1.5,ease:"elastic.out(1,0.5)"});if(g)gsap.fromTo(g,{opacity:0,scale:.5},{opacity:1,scale:2,duration:1.2,ease:"power2.out"})},[ph]);if(!vi)return null;return React.createElement("div",{className:"scr"},ph==="silence"&&React.createElement("div",{style:{fontSize:"clamp(2rem,5vw,4rem)",fontWeight:300,color:"rgba(255,255,255,.2)",animation:"fi .5s ease both"}},"..."),ph==="restoring"&&React.createElement("div",{style:{position:"absolute",inset:0,pointerEvents:"none",background:"radial-gradient(circle,rgba(255,77,109,.3),rgba(123,44,191,.2),transparent 70%)"}}),(ph==="restoring"||ph==="pulsing")&&React.createElement("div",{style:{position:"relative",animation:"fi .5s ease both"}},React.createElement("div",{ref:gr,style:{position:"absolute",inset:0,background:"radial-gradient(circle,rgba(255,77,109,.4),rgba(255,117,143,.2),transparent 70%)",filter:"blur(60px)"}}),React.createElement("div",{ref:hr,style:{position:"relative",zIndex:1}},React.createElement("div",{className:ph==="pulsing"?"hp":"",style:ph==="pulsing"?{filter:"drop-shadow(0 0 30px rgba(255,77,109,.6))"}:{}},React.createElement(HS,{s:224,c:"#FF4D6D"}))))))}
+const hd=Array.from({length:15},()=>({left:Math.random()*100,hue:343+Math.random()*20,light:60+Math.random()*20,x:(Math.random()-.5)*200,dur:3+Math.random()*3,delay:Math.random()*3}));
+function S6({or,vi}){const[s1,s12]=useState(false),[s2,s22]=useState(false),[sb,sb2]=useState(false);useEffect(()=>{if(!vi)return;s12(false);s22(false);sb2(false);const t1=setTimeout(()=>s12(true),800),t2=setTimeout(()=>s22(true),3e3),t3=setTimeout(()=>sb2(true),4500);return()=>{clearTimeout(t1);clearTimeout(t2);clearTimeout(t3)}},[vi]);if(!vi)return null;return React.createElement("div",{className:"scr",style:{padding:"0 24px"}},React.createElement("div",{style:{position:"absolute",inset:0,pointerEvents:"none",overflow:"hidden"}},hd.map((h,i)=>React.createElement("div",{key:i,className:"fh",style:{left:`${h.left}%`,"--fd":`${h.dur}s`,"--fl":`${h.delay}s`,"--fx":`${h.x}px`}},React.createElement(HS,{s:16,c:`hsla(${h.hue},80%,${h.light}%,.6)`})))),s1&&React.createElement("div",{style:{textAlign:"center",maxWidth:640,marginBottom:32,animation:"fs .8s ease both"}},React.createElement("div",{style:{marginBottom:24,display:"flex",justifyContent:"center"}},React.createElement("div",{className:"hp"},React.createElement(HS,{s:80,style:{filter:"drop-shadow(0 0 20px rgba(255,77,109,.5))"}}))),React.createElement("p",{style:{fontSize:"clamp(1.25rem,3.5vw,2.25rem)",fontWeight:700,lineHeight:1.6}},React.createElement("span",{className:"tg"},"Потому что среди миллиардов людей"),React.createElement("br"),React.createElement("span",{className:"tg"},"именно ты стал(а) самым важным"),React.createElement("br"),React.createElement("span",{className:"tg"},"человеком в моей жизни ",React.createElement(HS,{s:24,style:{verticalAlign:"middle"}})))),s2&&React.createElement("p",{style:{textAlign:"center",fontSize:"clamp(1rem,2.5vw,1.5rem)",color:"rgba(255,255,255,.6)",fontWeight:300,fontStyle:"italic",marginBottom:48,animation:"fu .8s ease both"}},"Спасибо, что ты есть."),sb&&React.createElement("button",{className:"btn btn-p",onClick:or,style:{animation:"fu .6s ease both",fontSize:"1.125rem",zIndex:20}},"Создать такую же историю ",React.createElement(HS,{s:20,style:{verticalAlign:"middle"}}))))}
+function App(){const[s,ss]=useState(1);return React.createElement("div",{style:{position:"fixed",inset:0,overflow:"hidden"}},React.createElement(PF),React.createElement("div",{style:{width:"100%",height:"100dvh",position:"relative",overflow:"hidden"}},React.createElement("div",{className:"aurora a1"}),React.createElement("div",{className:"aurora a2"}),React.createElement("div",{className:"aurora a3"}),React.createElement(S1,{vi:s===1,oc:()=>ss(2)}),React.createElement(S2,{vi:s===2,oc:()=>ss(3)}),React.createElement(S3,{vi:s===3,oc:()=>ss(4)}),React.createElement(S4,{vi:s===4,oc:()=>ss(5)}),React.createElement(S5,{vi:s===5,oc:()=>ss(6)}),React.createElement(S6,{vi:s===6,or:()=>ss(1)})))}ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
 </script>
 </body>
 </html>
